@@ -15,6 +15,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'public/vendor/jquery/dist/jquery.js',
+      'public/vendor/angular/angular.min.js',
+      'public/vendor/angular-mocks/angular-mocks.js',
+      'public/vendor/angular-resource/angular-resource.js',
+      'public/vendor/angular-ui-router/release/angular-ui-router.min.js',
+      'public/vendor/angular-local-storage/angular-local-storage.min.js',
+      'public/vendor/toastr/toastr.js',
+      'public/app/**/*.js',
       'test/karma/**/*.js'
     ],
 
@@ -55,11 +63,11 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   });
 };
