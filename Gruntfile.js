@@ -87,6 +87,16 @@ module.exports = function(grunt){
       build: {
         src: ["build"]
       }
+    },
+
+    watch: {
+      src: {
+        files: ['public/app/**/*.js', 'server/**/*.js', 'server.js'],
+        tasks: ['jshint'],
+        options: {
+          spawn: false
+        }
+      }
     }
 
 
@@ -98,8 +108,11 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask("cleanAll", 'clean');
+
+  grunt.registerTask("watchMe", 'watch');
 
   grunt.registerTask("frontTest", 'karma');
   grunt.registerTask("backTest", 'simplemocha');
