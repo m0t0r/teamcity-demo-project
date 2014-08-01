@@ -1,6 +1,9 @@
 extends ../includes/layout
 block main-content
-    h1 Good to go!
+    .navbar.navbar-fixed-top
+        .container
+            .navbar-collapse.collapse
+                div(ng-include="'/partials/auth/partials/navbar-login'")
 
-    footer.container.text-center
-        h6 &copy; 2014 teamcity-demo-project
+    section.content
+        div(ui-view)

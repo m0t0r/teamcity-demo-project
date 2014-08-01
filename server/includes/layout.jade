@@ -6,6 +6,7 @@ html
         link(rel="stylesheet", href="/vendor/bootstrap/dist/css/bootstrap.min.css")
         link(rel="stylesheet", href="/vendor/toastr/toastr.min.css")
         link(rel="stylesheet", href="/assets/css/styles.css")
-    body()
+    body(ng-app="tcApp")
+        include currentUser
         block main-content
         include scripts

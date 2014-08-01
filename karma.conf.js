@@ -20,7 +20,6 @@ module.exports = function(config) {
       'public/vendor/angular-mocks/angular-mocks.js',
       'public/vendor/angular-resource/angular-resource.js',
       'public/vendor/angular-ui-router/release/angular-ui-router.min.js',
-      'public/vendor/angular-local-storage/angular-local-storage.min.js',
       'public/vendor/toastr/toastr.js',
       'public/app/**/*.js',
       'test/karma/**/*.js'

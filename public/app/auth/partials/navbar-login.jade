@@ -1,0 +1,21 @@
+.navbar-right(ng-controller="NavBarLoginCtrl")
+    form.navbar-form(ng-hide="identity.isAuthenticated()")
+        .form-group
+            input.form-control(placeholder="Email", ng-model="username")
+        .form-group
+            input.form-control(placeholder="Password", type="password", ng-model="password")
+        button.btn.btn-info(ng-click="signin(username, password)") Sign In
+
+    .row(ng-hide="identity.isAuthenticated()")
+        .col-md-4.col-md-offset-2
+            .navbar-link.navbar-link-custom-1
+                a(href="/signup") Create new account
+
+    ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
+        li.dropdown
+            a.dropdown-toggle(href="#", data-toggle="dropdown")
+                | {{ identity.currentUser.firstName + ' ' + identity.currentUser.lastName}}
+                b.caret
+            ul.dropdown-menu
+                li
+                    a(href="", ng-click="signout()") Sign Out
