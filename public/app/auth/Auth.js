@@ -26,6 +26,18 @@ angular.module('tcApp').factory('Auth', function($http, $q, Identity, UserResour
         deferred.resolve(true);
       });
       return deferred.promise;
+    },
+
+    createUser: function(userData) {
+      var newUser = new UserResource(userData);
+      var deferred = $q.defer();
+      newUser.$save().then(function() {
+        Identity.currentUser = newUser;
+        deferred.resolve(true);
+      }, function(res) {
+        deferred.reject(res.data);
+      });
+      return deferred.promise;
     }
 
   };

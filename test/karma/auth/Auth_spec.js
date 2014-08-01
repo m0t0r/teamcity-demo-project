@@ -51,6 +51,19 @@ describe('Services', function(){
       expect(identity.currentUser).toBeUndefined();
     })
 
+    it('sends a POST request when user sign up', function() {
+      $httpBackend.expectPOST('/api/v1/users').respond(200);
+      var userData = {
+        username:'test@email.com',
+        password:'12345',
+        firstName:'unit',
+        lastName:'test'
+      };
+      auth.createUser(userData);
+      $httpBackend.flush();
+      expect(identity.currentUser).toBeDefined();
+    });
+
   });
 
 });

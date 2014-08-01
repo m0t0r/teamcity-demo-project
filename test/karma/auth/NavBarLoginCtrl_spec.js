@@ -2,11 +2,11 @@ describe('Controllers', function(){
 
   describe('NavBarLogin controller', function(){
 
-    var deferred, scope, state, rootScope, Auth, notifier, controller, $httpBackend;
+    var deferred, scope, rootScope, Auth, notifier, controller, $httpBackend;
 
     beforeEach(module('tcApp'));
 
-    beforeEach(inject(function(_$q_, _$rootScope_, _$controller_, _$state_, _Auth_, _$httpBackend_, _Notifier_) {
+    beforeEach(inject(function(_$q_, _$rootScope_, _$controller_, _Auth_, _$httpBackend_, _Notifier_) {
       deferred = _$q_.defer();
       rootScope = _$rootScope_;
       scope = _$rootScope_.$new();
@@ -33,7 +33,6 @@ describe('Controllers', function(){
 
       expect(Auth.authenticateUser).toHaveBeenCalledWith('unit', 'test');
       expect(notifier.notify).toHaveBeenCalled();
-      //expect(state.current.name).toBe('chat');
     });
 
     it('calls Auth service and resolves promise if sign out was successful', function(){
@@ -49,8 +48,20 @@ describe('Controllers', function(){
       expect(scope.password).toBe('');
       expect(Auth.logoutUser).toHaveBeenCalled();
       expect(notifier.notify).toHaveBeenCalled();
-      //expect(state.current.name).toBe('index');
     });
+
+    it('should request Auth service and resolve promise when sign up', function() {
+      $httpBackend.expectGET('/partials/chat/partials/chat-index').respond(200);
+      $httpBackend.expectGET('/partials/main/partials/main').respond(200);
+      spyOn(Auth, 'createUser').andReturn(deferred.promise);
+      spyOn(notifier, 'notify');
+      scope.signup();
+      deferred.resolve(true);
+      rootScope.$apply();
+      $httpBackend.flush();
+
+      expect(Auth.createUser).toHaveBeenCalled();
+    })
 
   });
 

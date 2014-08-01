@@ -12,6 +12,11 @@ angular.module('tcApp').config(function($stateProvider, $locationProvider){
       templateUrl:'/partials/main/partials/main',
       controller:'MainCtrl'
     })
+    .state('signup', {
+      url:'/signup',
+      templateUrl:'/partials/auth/partials/signup',
+      controller:'NavBarLoginCtrl'
+    })
     .state('chat', {
       url:'/chat',
       templateUrl:'/partials/chat/partials/chat-index',

@@ -1,2 +1,19 @@
 .container
-    h1 Chat is coming soon...
+    .lead Say something to people!
+    .well(ng-repeat="message in chat.messages")
+        h4 {{ message.author }} said:
+        p {{ message.text }}
+        p.text-right on {{ message.date | date}}
+
+    form.form-horizontal(name="chatForm" ng-show="identity.isAuthenticated()")
+        fieldset
+            legend Write your comment here
+                .form-group
+                    .col-md-3
+                        textarea.form-control(name="message", placeholder="Your message here", ng-model="chat.message", required)
+                .form-group
+                    .col-md-3
+                        .pull-right
+                            button.btn.btn-primary(ng-click="sendMessage()") Send message
+
+    h3.text-info(ng-hide="identity.isAuthenticated()") You have to sign in in order to leave a message!

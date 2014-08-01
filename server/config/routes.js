@@ -1,7 +1,7 @@
 'use strict';
 var config = require('./config'),
     users = require('../controllers/users'),
-    auth = require('./auth'),
+    auth = require('./../utils/auth'),
     router = require('express').Router();
 
 module.exports = function(app, config) {
@@ -9,9 +9,7 @@ module.exports = function(app, config) {
   var apiRoute = '/api/'+ config.api;
 
   // Users
-  //router.get(apiRoute+'/users', function(req, res, next) {
-  //  users.getUser(req, res, next);
-  //});
+  app.post(apiRoute+'/users', users.createUser);
 
   // Auth
   app.post('/login', auth.authenticate);

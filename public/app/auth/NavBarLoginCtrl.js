@@ -27,4 +27,20 @@ angular.module('tcApp')
     });
   };
 
-});
+  $scope.signup = function() {
+    var userData = {
+      username:$scope.email,
+      password:$scope.password,
+      firstName:$scope.firstName,
+      lastName:$scope.lastName
+    };
+    Auth.createUser(userData).then(function() {
+      Notifier.notify('Your account has been created!');
+      $state.go('chat');
+    }, function(reason) {
+      Notifier.error(reason);
+    });
+  };
+
+
+  });

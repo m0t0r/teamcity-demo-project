@@ -1,0 +1,27 @@
+.container
+    .well
+        form.form-horizontal(name="signupForm")
+            fieldset
+                legend Sign up just for one minute
+                    .form-group
+                        label.col-md-2.control-label(for="firstName") First Name
+                        .col-md-3
+                            input.form-control(name="firstName", type="text", placeholder="Your first name", ng-model="firstName", required)
+                    .form-group
+                        label.col-md-2.control-label(for="lastName") Last Name
+                        .col-md-3
+                            input.form-control(name="lastName", type="text", placeholder="Your last name", ng-model="lastName", required)
+                    .form-group
+                        label.col-md-2.control-label(for="email") Email
+                        .col-md-3
+                            input.form-control(name="email", type="email", placeholder="Your email", ng-model="email", required)
+                    .form-group
+                        label.col-md-2.control-label(for="password") Password
+                        .col-md-3
+                            input.form-control(name="password", type="password", placeholder="Your password", ng-model="password", required)
+                    .form-group
+                        .col-md-2.col-md-offset-3
+                            .pull-left
+                                button.btn.btn-primary(ng-click="signup()") Sign up
+                                |  &nbsp;
+                                a.btn.btn-default(href="/") Cancel

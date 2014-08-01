@@ -1,6 +1,6 @@
 'use strict';
-//var User = require('./../models/user').User,
-var User = require('mongoose').model('User');
+var User = require('mongoose').model('User'),
+    encryption = require('./../utils/encryption');
 
 exports.getUser = function(req, res, next){
   if(req.params && req.params.id) {
@@ -16,5 +16,26 @@ exports.getUser = function(req, res, next){
   }
 };
 
+exports.createUser = function(req, res, next) {
+  var userData = req.body;
+  userData.username = userData.username.toLowerCase();
+  userData.salt = encryption.createSalt();
+  userData.hashedPassword = encryption.hashPassword(userData.salt, userData.password);
 
+  User.create(userData, function(err, user) {
+    if(err){
+      if(err.toString().indexOf('E11000') >-1){
+        err = new Error('Duplicate username');
+      }
+      res.status(400);
+      res.end(err.toString());
+    }
+    req.logIn(user, function(err) {
+      if(err) {
+        return next(err);
+      }
+      res.send(user);
+    })
+  });
+};
 
