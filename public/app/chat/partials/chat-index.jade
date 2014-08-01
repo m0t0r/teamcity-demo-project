@@ -14,6 +14,6 @@
                 .form-group
                     .col-md-3
                         .pull-right
-                            button.btn.btn-primary(ng-click="sendMessage()") Send message
+                            button.btn.btn-primary(ng-click="sendMessage(identity.currentUser, chat.message)") Send message
 
     h3.text-info(ng-hide="identity.isAuthenticated()") You have to sign in in order to leave a message!

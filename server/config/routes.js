@@ -1,8 +1,8 @@
 'use strict';
 var config = require('./config'),
     users = require('../controllers/users'),
-    auth = require('./../utils/auth'),
-    router = require('express').Router();
+    messages = require('../controllers/messages'),
+    auth = require('./../utils/auth');
 
 module.exports = function(app, config) {
 
@@ -10,6 +10,9 @@ module.exports = function(app, config) {
 
   // Users
   app.post(apiRoute+'/users', users.createUser);
+
+  // Messages
+  app.post(apiRoute+'/chat', messages.submitMessage);
 
   // Auth
   app.post('/login', auth.authenticate);

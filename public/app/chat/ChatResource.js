@@ -5,5 +5,5 @@ angular.module('tcApp').factory('ChatResource', function($resource) {
     update:{url:'/api/v1/chat/:id', method:'PUT', isArray:false}
   });
 
-  return userResource;
+  return chatResource;
 });

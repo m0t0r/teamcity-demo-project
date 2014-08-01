@@ -1,6 +1,7 @@
 'use strict';
 var mongoose = require('mongoose'),
-    userModel = require('../models/User');
+    userModel = require('../models/user'),
+    messagesModel = require('../models/message');
 
 
 module.exports = function(config) {

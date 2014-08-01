@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('tcApp').controller('ChatCtrl', function($scope, Identity){
+angular.module('tcApp').controller('ChatCtrl', function($scope, Chat, Identity, Notifier){
 
   $scope.identity = Identity;
   $scope.chat = {};
@@ -21,18 +21,23 @@ angular.module('tcApp').controller('ChatCtrl', function($scope, Identity){
       text:'Yup!',
       date:new Date()
     }
-  ]
+  ];
 
-  $scope.sendMessage = function(){
-    var user = Identity.currentUser.firstName + ' ' + Identity.currentUser.lastName;
-    var text = $scope.chat.message;
+  $scope.sendMessage = function(author, message){
+    var user = author.firstName + ' ' + author.lastName;
     var newMessage = {
-      user: user,
-      text:text,
+      author: user,
+      text:message,
       date: new Date()
-    }
+    };
 
-    console.log(newMessage);
-  }
+    Chat.sendMessage(newMessage).then(function(success){
+      if(success){
+        $scope.chat.messages.push = newMessage;
+      } else {
+        Notifier.error('Could not send your message!');
+      }
+    });
+  };
 
 });

@@ -50,7 +50,7 @@ describe('Controllers', function(){
       expect(notifier.notify).toHaveBeenCalled();
     });
 
-    it('should request Auth service and resolve promise when sign up', function() {
+    it('calls Auth service and resolve promise when user signs up', function() {
       $httpBackend.expectGET('/partials/chat/partials/chat-index').respond(200);
       $httpBackend.expectGET('/partials/main/partials/main').respond(200);
       spyOn(Auth, 'createUser').andReturn(deferred.promise);
