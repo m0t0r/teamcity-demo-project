@@ -14,7 +14,6 @@ angular.module('tcApp').factory('Chat', function($http, $q, ChatResource){
       });
       return deferred.promise;
     }
-
   };
 
 });

@@ -12,6 +12,7 @@ module.exports = function(app, config) {
   app.post(apiRoute+'/users', users.createUser);
 
   // Messages
+  app.get(apiRoute+'/chat', messages.getMessages);
   app.post(apiRoute+'/chat', messages.submitMessage);
 
   // Auth
