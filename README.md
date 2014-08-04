@@ -10,6 +10,6 @@ This project was created in a test purpose in order to create a test continuous 
 The project uses NodeJS at server-side, so that you have to have NodeJS in order to install this project and then just run
 ```
 1. npm install
-2. bower install
+2. grunt install
 ```
 MongoDB database is in use in this project as well, in order to get support a MongoLab account was created and used in this project, if you wish to chage this, you need to change config options at ```server/config/config.js```
