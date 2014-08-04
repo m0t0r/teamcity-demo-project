@@ -97,8 +97,19 @@ module.exports = function(grunt){
           spawn: false
         }
       }
-    }
+    },
 
+    bower: {
+      install: {
+        options: {
+          targetDir: './public/vendor',
+          layout: 'byType',
+          install: true,
+          verbose: false,
+          cleanTargetDir: true
+        }
+      }
+    }
 
   });
 
@@ -109,15 +120,18 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-bower-task');
 
   grunt.registerTask("cleanAll", 'clean');
 
   grunt.registerTask("watchMe", 'watch');
 
+  grunt.registerTask("install", 'bower');
+
   grunt.registerTask("frontTest", 'karma');
   grunt.registerTask("backTest", 'simplemocha');
   grunt.registerTask("testAll",['karma', 'simplemocha']);
 
-  grunt.registerTask("default",['jshint', 'karma', 'simplemocha', 'clean', 'concat', 'uglify']);
+  grunt.registerTask("default",['install','jshint', 'karma', 'simplemocha', 'clean', 'concat', 'uglify']);
 
 }
