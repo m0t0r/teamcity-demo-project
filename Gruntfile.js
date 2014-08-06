@@ -66,7 +66,7 @@ module.exports = function(grunt){
       build: {
         files: [{
           src: ['public/app/**/*.js'],
-          dest: 'build/<%= pkg.name %>.js'
+          dest: 'build/public/<%= pkg.name %>.js'
         }]
       }
     },
@@ -77,8 +77,8 @@ module.exports = function(grunt){
       },
       build: {
         files: {
-          'build/<%= pkg.name %>.min.js':
-            ['build/<%= pkg.name %>.js'],
+          'build/public/<%= pkg.name %>.min.js':
+            ['build/public/<%= pkg.name %>.js']
         }
       }
     },
@@ -98,15 +98,61 @@ module.exports = function(grunt){
         }
       }
     },
+    /* REVIEW THIS */
+    copy: {
+      main: {
+        files: [
+          // includes files within path
+          {expand: true, src: ['path/*'], dest: 'dest/', filter: 'isFile'},
 
+          // includes files within path and its sub-directories
+          {expand: true, src: ['path/**'], dest: 'dest/'},
+
+          // makes all src relative to cwd
+          {expand: true, cwd: 'path/', src: ['**'], dest: 'dest/'},
+
+          // flattens results to a single level
+          {expand: true, flatten: true, src: ['path/**'], dest: 'dest/', filter: 'isFile'}
+        ]
+      }
+    },
+    /* --- REVIEW THIS */
     bower: {
       install: {
         options: {
-          targetDir: './public/vendor',
+          targetDir: './build/public/vendor',
           layout: 'byType',
           install: true,
           verbose: false,
           cleanTargetDir: true
+        }
+      }
+    },
+
+    jade: {
+      compile: {
+        options: {
+          pretty:true,
+          data: {
+            debug: false
+          }
+        },
+        files: {
+          "build/index.html": "server/views/index.jade",
+          "build/partials/navbar-login.html":"public/app/auth/partials/navbar-login.jade",
+          "build/partials/signup.html":"public/app/auth/partials/signup.jade",
+          "build/partials/chat-index.html":"public/app/chat/partials/chat-index.jade",
+          "build/partials/main.html":"public/app/main/partials/main.jade"
+        }
+      }
+    },
+    stylus: {
+      compile: {
+        options: {
+          paths: ['public/assets/**/']
+        },
+        files: {
+          'build/assets/styles.css': ['public/assets/**/*.styl'] // compile and concat into single file
         }
       }
     }
@@ -121,6 +167,10 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
+
 
   grunt.registerTask("cleanAll", 'clean');
 
@@ -132,6 +182,9 @@ module.exports = function(grunt){
   grunt.registerTask("backTest", 'simplemocha');
   grunt.registerTask("testAll",['karma', 'simplemocha']);
 
-  grunt.registerTask("default",['install','jshint', 'karma', 'simplemocha', 'clean', 'concat', 'uglify']);
+  grunt.registerTask("default",['jshint', 'karma', 'simplemocha', 'clean', 'concat', 'uglify']);
+
+
+  grunt.registerTask("build",['jade','bower']);
 
 }
