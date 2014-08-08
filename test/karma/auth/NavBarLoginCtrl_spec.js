@@ -22,8 +22,8 @@ describe('Controllers', function(){
     });
 
     it('calls Auth service and resolves promise if sign in was successful', function(){
-      $httpBackend.expectGET('/partials/chat/partials/chat-index').respond(200);
-      $httpBackend.expectGET('/partials/main/partials/main').respond(200);
+      $httpBackend.expectGET('/partials/chat/chat-index.html').respond(200);
+      $httpBackend.expectGET('/partials/main/main.html').respond(200);
       spyOn(Auth, 'authenticateUser').andReturn(deferred.promise);
       spyOn(notifier, 'notify');
       scope.signin('unit', 'test');
@@ -36,7 +36,7 @@ describe('Controllers', function(){
     });
 
     it('calls Auth service and resolves promise if sign out was successful', function(){
-      $httpBackend.expectGET('/partials/main/partials/main').respond(200);
+      $httpBackend.expectGET('/partials/main/main.html').respond(200);
       spyOn(Auth, 'logoutUser').andReturn(deferred.promise);
       spyOn(notifier, 'notify');
       scope.signout();
@@ -51,8 +51,8 @@ describe('Controllers', function(){
     });
 
     it('calls Auth service and resolve promise when user signs up', function() {
-      $httpBackend.expectGET('/partials/chat/partials/chat-index').respond(200);
-      $httpBackend.expectGET('/partials/main/partials/main').respond(200);
+      $httpBackend.expectGET('/partials/chat/chat-index.html').respond(200);
+      $httpBackend.expectGET('/partials/main/main.html').respond(200);
       spyOn(Auth, 'createUser').andReturn(deferred.promise);
       spyOn(notifier, 'notify');
       scope.signup();

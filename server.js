@@ -2,7 +2,6 @@
 
 var express = require('express');
 
-
 // set environment
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 

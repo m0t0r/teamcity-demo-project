@@ -20,7 +20,7 @@ module.exports = function(app, config) {
   app.post('/logout', auth.logout)
 
   app.get('/partials/*', function(req, res, next){
-    res.render('../../public/app/' + req.params[0]);
+    res.render('../../public/partials/' + req.params[0]);
   });
 
   app.get('*', function(req, res) {

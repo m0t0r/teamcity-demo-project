@@ -18,7 +18,7 @@ module.exports = function(grunt){
         "noempty": true,
         "nonew": true,
         "trailing": true,
-        "maxlen": 100,
+        "maxlen": 200,
         "boss": true,
         "eqnull": true,
         "expr": true,
@@ -66,7 +66,7 @@ module.exports = function(grunt){
       build: {
         files: [{
           src: ['public/app/**/*.js'],
-          dest: 'build/public/<%= pkg.name %>.js'
+          dest: 'build/public/app/<%= pkg.name %>.js'
         }]
       }
     },
@@ -77,8 +77,8 @@ module.exports = function(grunt){
       },
       build: {
         files: {
-          'build/public/<%= pkg.name %>.min.js':
-            ['build/public/<%= pkg.name %>.js']
+          'build/public/app/<%= pkg.name %>.min.js':
+            ['build/public/app/<%= pkg.name %>.js']
         }
       }
     },
@@ -98,25 +98,20 @@ module.exports = function(grunt){
         }
       }
     },
-    /* REVIEW THIS */
+
     copy: {
       main: {
         files: [
           // includes files within path
-          {expand: true, src: ['path/*'], dest: 'dest/', filter: 'isFile'},
-
+          {expand: true, src: ['server.js'], dest: 'build/', filter: 'isFile'},
+          {expand: true, src: ['protractor-conf.js'], dest: 'build/', filter: 'isFile'},
           // includes files within path and its sub-directories
-          {expand: true, src: ['path/**'], dest: 'dest/'},
-
-          // makes all src relative to cwd
-          {expand: true, cwd: 'path/', src: ['**'], dest: 'dest/'},
-
-          // flattens results to a single level
-          {expand: true, flatten: true, src: ['path/**'], dest: 'dest/', filter: 'isFile'}
+          {expand: true, src: ['server/**'], dest: 'build/'},
+          {expand: true, src: ['test/e2e/**'], dest: 'build/'},
         ]
       }
     },
-    /* --- REVIEW THIS */
+
     bower: {
       install: {
         options: {
@@ -138,22 +133,28 @@ module.exports = function(grunt){
           }
         },
         files: {
-          "build/index.html": "server/views/index.jade",
-          "build/partials/navbar-login.html":"public/app/auth/partials/navbar-login.jade",
-          "build/partials/signup.html":"public/app/auth/partials/signup.jade",
-          "build/partials/chat-index.html":"public/app/chat/partials/chat-index.jade",
-          "build/partials/main.html":"public/app/main/partials/main.jade"
+          "build/public/partials/auth/navbar-login.html":"public/app/auth/partials/navbar-login.jade",
+          "build/public/partials/auth/signup.html":"public/app/auth/partials/signup.jade",
+          "build/public/partials/chat/chat-index.html":"public/app/chat/partials/chat-index.jade",
+          "build/public/partials/main/main.html":"public/app/main/partials/main.jade"
         }
       }
     },
+
     stylus: {
       compile: {
         options: {
           paths: ['public/assets/**/']
         },
         files: {
-          'build/assets/styles.css': ['public/assets/**/*.styl'] // compile and concat into single file
+          'build/public/assets/styles.css': ['public/assets/**/*.styl'] // compile and concat into single file
         }
+      }
+    },
+
+    nodemon: {
+      dev: {
+        script: 'build/server.js'
       }
     }
 
@@ -170,21 +171,19 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-nodemon');
 
 
   grunt.registerTask("cleanAll", 'clean');
 
   grunt.registerTask("watchMe", 'watch');
 
-  grunt.registerTask("install", 'bower');
-
   grunt.registerTask("frontTest", 'karma');
   grunt.registerTask("backTest", 'simplemocha');
   grunt.registerTask("testAll",['karma', 'simplemocha']);
 
-  grunt.registerTask("default",['jshint', 'karma', 'simplemocha', 'clean', 'concat', 'uglify']);
+  grunt.registerTask("build",['jshint', 'karma', 'simplemocha', 'clean', 'bower', 'jade', 'stylus','concat', 'uglify', 'copy']);
 
-
-  grunt.registerTask("build",['jade','bower']);
+  grunt.registerTask("default",['build', 'nodemon']);
 
 }

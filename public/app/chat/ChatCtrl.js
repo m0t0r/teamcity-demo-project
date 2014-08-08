@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('tcApp')
-  .controller('ChatCtrl', function($scope, Chat, Identity, Notifier, ChatResource){
+  .controller('ChatCtrl', ['$scope', 'Chat', 'Identity', 'Notifier', 'ChatResource', function($scope, Chat, Identity, Notifier, ChatResource){
 
     $scope.identity = Identity;
     $scope.chat = {};
@@ -25,4 +25,4 @@ angular.module('tcApp')
       });
     };
 
-  });
+  }]);

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('tcApp').factory('Chat', function($http, $q, ChatResource){
+angular.module('tcApp').factory('Chat', ['$http', '$q', 'ChatResource', function($http, $q, ChatResource){
 
   return {
 
@@ -16,4 +16,4 @@ angular.module('tcApp').factory('Chat', function($http, $q, ChatResource){
     }
   };
 
-});
+}]);

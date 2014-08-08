@@ -1,7 +1,7 @@
 "use strict";
 
-angular.module('tcApp').controller('MainCtrl',function(){
+angular.module('tcApp').controller('MainCtrl',[function(){
 
 
 
-});
+}]);

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('tcApp').factory('Identity', function($window, UserResource) {
+angular.module('tcApp').factory('Identity', ['$window', 'UserResource', function($window, UserResource) {
   var currentUser;
   if($window.currentUserObj){
     currentUser = new UserResource();
@@ -12,4 +12,4 @@ angular.module('tcApp').factory('Identity', function($window, UserResource) {
       return !!this.currentUser;
     }
   };
-});
+}]);

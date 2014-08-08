@@ -1,7 +1,7 @@
 'use strict';
 angular.module('tcApp').value('Toastr', toastr);
 
-angular.module('tcApp').factory('Notifier', function(Toastr) {
+angular.module('tcApp').factory('Notifier', ['Toastr', function(Toastr) {
   return {
     notify: function(msg) {
       Toastr.success(msg);
@@ -10,4 +10,4 @@ angular.module('tcApp').factory('Notifier', function(Toastr) {
       Toastr.error(msg);
     }
   };
-});
+}]);

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('tcApp').factory('Auth', function($http, $q, Identity, UserResource){
+angular.module('tcApp').factory('Auth', ['$http', '$q','Identity', 'UserResource',function($http, $q, Identity, UserResource){
 
   return {
 
@@ -42,4 +42,4 @@ angular.module('tcApp').factory('Auth', function($http, $q, Identity, UserResour
 
   };
 
-});
+}]);

@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('tcApp')
-  .controller('NavBarLoginCtrl', function($scope, $state, Auth, Notifier, Identity){
+  .controller('NavBarLoginCtrl', ['$scope', '$state', 'Auth', 'Notifier', 'Identity', function($scope, $state, Auth, Notifier, Identity){
 
     $scope.identity = Identity;
 
@@ -43,4 +43,4 @@ angular.module('tcApp')
     };
 
 
-  });
+  }]);
