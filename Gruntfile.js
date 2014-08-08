@@ -105,9 +105,11 @@ module.exports = function(grunt){
           // includes files within path
           {expand: true, src: ['server.js'], dest: 'build/', filter: 'isFile'},
           {expand: true, src: ['protractor-conf.js'], dest: 'build/', filter: 'isFile'},
+          {expand: true, src: ['Gruntfile.js'], dest: 'build/', filter: 'isFile'},
+          {expand: true, src: ['package.json'], dest: 'build/', filter: 'isFile'},
           // includes files within path and its sub-directories
           {expand: true, src: ['server/**'], dest: 'build/'},
-          {expand: true, src: ['test/e2e/**'], dest: 'build/'},
+          {expand: true, src: ['test/e2e/**'], dest: 'build/'}
         ]
       }
     },
@@ -156,6 +158,17 @@ module.exports = function(grunt){
       dev: {
         script: 'build/server.js'
       }
+    },
+
+    protractor: {
+      options: {
+        configFile: 'protractor-conf.js', // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false // If true, protractor will not use colors in its output.
+      },
+      all: {
+        configFile: 'protractor-conf.js' // Default config file
+      }
     }
 
   });
@@ -172,6 +185,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-protractor-runner');
 
 
   grunt.registerTask("cleanAll", 'clean');
@@ -181,6 +195,7 @@ module.exports = function(grunt){
   grunt.registerTask("frontTest", 'karma');
   grunt.registerTask("backTest", 'simplemocha');
   grunt.registerTask("testAll",['karma', 'simplemocha']);
+  grunt.registerTask("e2e", 'protractor');
 
   grunt.registerTask("build",['jshint', 'karma', 'simplemocha', 'clean', 'bower', 'jade', 'stylus','concat', 'uglify', 'copy']);
 
