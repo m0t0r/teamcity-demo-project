@@ -41,4 +41,5 @@ Thumbs.db
 ######################
 node_modules/*
 public/vendor/*
+build/*
 .idea/*
