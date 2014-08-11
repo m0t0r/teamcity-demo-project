@@ -8,8 +8,15 @@ exports.config = {
 
   framework: 'jasmine',
 
-  capabilities: {
-    'browserName': 'chrome'
-  }
+  multiCapabilities: [
+    {
+      name:'Chrome',
+      browserName: 'chrome'
+    },
+    {
+      name:'Firefox',
+      browserName: 'firefox'
+    }
+  ]
 
 };
