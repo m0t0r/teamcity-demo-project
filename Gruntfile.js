@@ -199,6 +199,6 @@ module.exports = function(grunt){
 
   grunt.registerTask("build",['jshint', 'karma', 'simplemocha', 'clean', 'bower', 'jade', 'stylus','concat', 'uglify', 'copy']);
 
-  grunt.registerTask("default",['build', 'nodemon']);
+  grunt.registerTask("default",['build', 'nodemon', 'e2e']);
 
 }
