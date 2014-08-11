@@ -167,8 +167,21 @@ module.exports = function(grunt){
         keepAlive: true, // If false, the grunt process stops when the test fails.
         noColor: false // If true, protractor will not use colors in its output.
       },
-      all: {
-        configFile: 'protractor-conf.js' // Default config file
+      chrome: {
+        options: {
+          configFile: 'protractor-conf.js', // Default config file
+          args: {
+            browser:'chrome'
+          }
+        }
+      },
+      firefox: {
+        options: {
+          configFile: 'protractor-conf.js', // Default config file
+          args: {
+            browser:'firefox'
+          }
+        }
       }
     },
 
@@ -210,7 +223,8 @@ module.exports = function(grunt){
   grunt.registerTask("frontTest", 'karma');
   grunt.registerTask("backTest", 'simplemocha');
   grunt.registerTask("testAll",['karma', 'simplemocha']);
-  grunt.registerTask('e2e', ['express:test', 'protractor']);
+  grunt.registerTask('e2e-chrome', ['express:test', 'protractor:chrome']);
+  grunt.registerTask('e2e-firefox', ['express:test', 'protractor:firefox']);
 
   grunt.registerTask("build",['jshint', 'karma', 'simplemocha', 'clean', 'bower', 'jade', 'stylus','concat', 'uglify', 'copy']);
 
