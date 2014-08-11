@@ -4,7 +4,6 @@
   "description": "Simple JS full stack project to test TeamCity CI ",
   "main": "server.js",
   "scripts": {
-    "serve":"node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
   },
@@ -41,6 +40,7 @@
     "grunt-contrib-stylus": "~0.18.0",
     "grunt-contrib-uglify": "~0.5.1",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-express-server": "~0.4.17",
     "grunt-karma": "~0.8.3",
     "grunt-nodemon": "~0.3.0",
     "grunt-protractor-runner": "~1.1.0",

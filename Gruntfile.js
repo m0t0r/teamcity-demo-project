@@ -160,6 +160,7 @@ module.exports = function(grunt){
       }
     },
 
+    // E2E specific tasks
     protractor: {
       options: {
         configFile: 'protractor-conf.js', // Default config file
@@ -169,7 +170,20 @@ module.exports = function(grunt){
       all: {
         configFile: 'protractor-conf.js' // Default config file
       }
+    },
+
+    express: {
+      options: {
+        port: 8080
+      },
+      test: {
+        options: {
+          script: 'build/server.js',
+          node_env: 'test'
+        }
+      }
     }
+    // E2E specific tasks
 
   });
 
@@ -186,6 +200,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-protractor-runner');
+  grunt.loadNpmTasks('grunt-express-server');
 
 
   grunt.registerTask("cleanAll", 'clean');
@@ -195,10 +210,10 @@ module.exports = function(grunt){
   grunt.registerTask("frontTest", 'karma');
   grunt.registerTask("backTest", 'simplemocha');
   grunt.registerTask("testAll",['karma', 'simplemocha']);
-  grunt.registerTask("e2e", 'protractor');
+  grunt.registerTask('e2e', ['express:test', 'protractor']);
 
   grunt.registerTask("build",['jshint', 'karma', 'simplemocha', 'clean', 'bower', 'jade', 'stylus','concat', 'uglify', 'copy']);
 
-  grunt.registerTask("default",['build', 'nodemon', 'e2e']);
+  grunt.registerTask("default",['build', 'nodemon']);
 
 }
