@@ -13,7 +13,7 @@ describe("Pages",function(){
     });
 
     it("has correct Sign In button text", function(){
-      var btn = element(by.tagName('button'));
+      var btn = element(by.className('btn-info'));
       expect(btn.getText()).toBe('Sign In');
     });
 
