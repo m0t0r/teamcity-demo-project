@@ -191,7 +191,7 @@ module.exports = function(grunt){
       },
       test: {
         options: {
-          script: 'server.js',
+          script: 'build/server.js',
           node_env: 'test'
         }
       }
