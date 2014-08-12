@@ -12,10 +12,10 @@ describe("Pages",function(){
       expect(message.getText()).toBe('TeamCity test project!');
     });
 
-    it("has correct Sign In button text", function(){
-      var btn = element(by.className('btn-info'));
-      expect(btn.getText()).toBe('Sign In');
-    });
+    //it("has correct Sign In button text", function(){
+    //  var btn = element(by.className('btn-info'));
+    //  expect(btn.getText()).toBe('Sign In');
+    //});
 
   });
 
